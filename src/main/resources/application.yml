@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:a6576f3c-3c8d-4d69-a118-7cdd064e4fc5
+    username: gabi
+    password:
+  jpa:
+    show-sql: true
+    #hibernate:
+    properties:
+      hibernate.format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: false
+spring-doc:
+  swagger-ui:
+    path: /swagger-ui.html

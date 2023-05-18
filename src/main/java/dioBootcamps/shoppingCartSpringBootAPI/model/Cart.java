@@ -12,18 +12,10 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-    private Optional<List<Product>> cart;
+    @ManyToOne
+    private Product product;
     private BigDecimal totalPrice;
     private Integer numberOfProducts;
-
-    public Optional<List<Product>> getCart() {
-        return cart;
-    }
-
-    public void setCart(Optional<List<Product>> cart) {
-        this.cart = cart;
-    }
-
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }
