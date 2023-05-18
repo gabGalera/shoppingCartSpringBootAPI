@@ -21,7 +21,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product atualizar(Product product) {
-        return null;
+        Optional<Product> actualData = productRepository.findById(product.getId());
+        if(actualData.isPresent()) {
+            actualData.get().setName(product.getName());
+            actualData.get().setPrice(product.getPrice());
+            return productRepository.save(actualData.get());
+        }
+        return productRepository.save(product);
     }
 
     @Override
