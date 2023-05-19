@@ -12,8 +12,8 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-    @ManyToOne
-    private Product product;
+    @OneToMany
+    private List<Product> products;
     private BigDecimal totalPrice;
     private Integer numberOfProducts;
     public BigDecimal getTotalPrice() {
@@ -31,7 +31,12 @@ public class Cart {
     public void setNumberOfProducts(Integer numberOfProducts) {
         this.numberOfProducts = numberOfProducts;
     }
-
+    public List<Product> getProducts() {
+        return products;
+    }
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
     public Long getId() {
         return id;
     }
