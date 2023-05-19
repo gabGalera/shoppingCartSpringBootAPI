@@ -6,10 +6,9 @@ import dioBootcamps.shoppingCartSpringBootAPI.service.ICartService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("carts")
@@ -20,6 +19,15 @@ public class CartController {
     @PostMapping
     public ResponseEntity<Cart> criarCarrinho() {
         Cart cart = cartService.criarCarrinho();
+        return ResponseEntity.ok(cart);
+    }
+
+    @PostMapping("/{cartId}/{productId}")
+    public ResponseEntity<Optional<Cart>> adicionarProdutos(
+            @PathVariable Long cartId,
+            @PathVariable Long productId
+    ) {
+        Optional<Cart> cart = cartService.adicionarProdutos(cartId, productId);
         return ResponseEntity.ok(cart);
     }
 }
