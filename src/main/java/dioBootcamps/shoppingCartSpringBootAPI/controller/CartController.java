@@ -24,10 +24,20 @@ public class CartController {
 
     @PostMapping("/{cartId}/{productId}")
     public ResponseEntity<Optional<Cart>> adicionarProdutos(
-            @PathVariable Long cartId,
-            @PathVariable Long productId
+            @PathVariable Integer cartId,
+            @PathVariable Integer productId
     ) {
         Optional<Cart> cart = cartService.adicionarProdutos(cartId, productId);
         return ResponseEntity.ok(cart);
     }
+
+    @PatchMapping("/{cartId}/{productId}")
+    public ResponseEntity<Cart> mudarQuantidadeDeUmProduto(
+            @PathVariable Integer cartId,
+            @PathVariable Integer productId,
+            @RequestBody Integer newQuantity
+    ) {
+      Cart cart = cartService.mudarQuantidadeDeUmProduto(cartId, productId, newQuantity);
+      return  ResponseEntity.ok(cart);
+    };
 }

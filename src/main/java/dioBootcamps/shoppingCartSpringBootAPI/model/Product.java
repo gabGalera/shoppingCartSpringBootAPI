@@ -9,16 +9,25 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
     private String Name;
-    private BigDecimal Price;
+    private BigDecimal TotalPrice;
+    private Integer Quantity;
 
-    public BigDecimal getPrice() {
-        return Price;
+    public Integer getQuantity() {
+        return Quantity;
     }
 
-    public void setPrice(BigDecimal price) {
-        Price = price;
+    public void setQuantity(Integer quantity) {
+        Quantity = quantity;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return TotalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        TotalPrice = totalPrice;
     }
 
     public String getName() {
@@ -29,11 +38,11 @@ public class Product {
         Name = name;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

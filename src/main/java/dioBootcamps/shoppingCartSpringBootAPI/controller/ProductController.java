@@ -21,7 +21,7 @@ public class ProductController {
         return ResponseEntity.ok(listOfProducts);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Product>> findById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Product>> findById(@PathVariable Integer id) {
         Optional<Product> listOfProducts = productService.findById(id);
         return ResponseEntity.ok(listOfProducts);
     }
@@ -36,7 +36,7 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
     @DeleteMapping
-    public ResponseEntity<String> atualizar(@RequestBody Long id) {
+    public ResponseEntity<String> atualizar(@RequestBody Integer id) {
         return ResponseEntity.ok(productService.deletar(id));
     }
 }

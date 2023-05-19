@@ -23,7 +23,8 @@ public class ProductServiceImpl implements IProductService {
         Optional<Product> actualData = productRepository.findById(product.getId());
         if(actualData.isPresent()) {
             actualData.get().setName(product.getName());
-            actualData.get().setPrice(product.getPrice());
+            actualData.get().setTotalPrice(product.getTotalPrice());
+            actualData.get().setQuantity(product.getQuantity());
             return productRepository.save(actualData.get());
         }
         return productRepository.save(product);
@@ -35,7 +36,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public Optional<Product> findById(Long id) {
+    public Optional<Product> findById(Integer id) {
         Optional<Product> product = productRepository.findById(id);
         if(product.isPresent()) {
             return product;
@@ -44,7 +45,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public String deletar(Long id) {
+    public String deletar(Integer id) {
         productRepository.deleteById(id);
         return "Product deleted";
     }

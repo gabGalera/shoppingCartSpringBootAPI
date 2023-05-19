@@ -27,14 +27,14 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Optional<Cart> adicionarProdutos(Long cartId, Long productId) {
+    public Optional<Cart> adicionarProdutos(Integer cartId, Integer productId) {
         Optional<Cart> cart = cartRepository.findById(cartId);
         Optional<Product> product = productRepository.findById(productId);
 
         if (cart.isPresent() && product.isPresent()) {
             List<Product> cartProducts = cart.get().getProducts();
             BigDecimal oldTotalPrice = cart.get().getTotalPrice();
-            BigDecimal productPrice = product.get().getPrice();
+            BigDecimal productPrice = product.get().getTotalPrice();
             Integer newQuantity = cart.get().getNumberOfProducts();
 
             if(cartProducts.stream().anyMatch(product1 -> product1.getId().equals(productId))){
@@ -60,12 +60,26 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Cart mudarQuantidadeDeUmProduto(Long newQuantity) {
+    public Cart mudarQuantidadeDeUmProduto(Integer cartId, Integer productId, Integer newQuantity) {
+        Cart cart = cartRepository.findById(cartId).get();
+        List<Product> oldListOfProducts = cart.getProducts();
+        List<Product> product = oldListOfProducts
+                .stream()
+                .filter(entry -> entry.getId().equals(productId))
+                .toList();
+        if(!product.isEmpty()) {
+            oldListOfProducts.remove(product.get(0));
+            product.get(0).setQuantity(newQuantity);
+            oldListOfProducts.add(product.get(0));
+            cart.setProducts(oldListOfProducts);
+            return cartRepository.save(cart);
+        }
+
         return null;
     }
 
     @Override
-    public String removerProdutos(Long cartId, Long productId) {
+    public String removerProdutos(Integer cartId, Integer productId) {
         return null;
     }
 }

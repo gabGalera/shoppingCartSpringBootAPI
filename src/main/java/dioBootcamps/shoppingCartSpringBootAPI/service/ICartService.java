@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ICartService {
     Cart criarCarrinho();
-    Optional<Cart> adicionarProdutos(Long cartId, Long productId);
-    Cart mudarQuantidadeDeUmProduto(Long newQuantity);
-    String removerProdutos(Long cartId, Long productId);
+    Optional<Cart> adicionarProdutos(Integer cartId, Integer productId);
+    Cart mudarQuantidadeDeUmProduto(Integer cartId, Integer productId, Integer newQuantity);
+    String removerProdutos(Integer cartId, Integer productId);
 }

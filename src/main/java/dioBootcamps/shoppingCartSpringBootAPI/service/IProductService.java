@@ -9,7 +9,7 @@ public interface IProductService {
     Product cadastrar(Product product);
     Product atualizar(Product product);
     Iterable<Product> findAll();
-    Optional<Product> findById(Long id);
-    String deletar(Long id);
+    Optional<Product> findById(Integer id);
+    String deletar(Integer id);
 
 }
