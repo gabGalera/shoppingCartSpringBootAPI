@@ -36,12 +36,17 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Optional<Product> findById(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        if(product.isPresent()) {
+            return product;
+        }
         return Optional.empty();
     }
 
     @Override
     public String deletar(Long id) {
-        return null;
+        productRepository.deleteById(id);
+        return "Product deleted";
     }
 
     ;
