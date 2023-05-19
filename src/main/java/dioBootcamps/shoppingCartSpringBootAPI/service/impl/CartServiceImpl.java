@@ -79,7 +79,28 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public String removerProdutos(Integer cartId, Integer productId) {
+    public Cart removerProdutos(Integer cartId, Integer productId) {
+        Optional<Cart> cart = cartRepository.findById(cartId);
+        if(cart.isPresent()) {
+            Product aimedProduct = cart.get()
+                    .getProducts()
+                    .stream()
+                    .filter(product -> product.getId().equals(productId))
+                    .toList()
+                    .get(0);
+
+            List<Product> newListOfProducts = cart.get()
+                    .getProducts()
+                    .stream()
+                    .filter(product -> !product.getId().equals(productId))
+                    .toList();
+
+            Cart newCart = cart.get();
+            newCart.setProducts(newListOfProducts);
+            newCart.setTotalPrice(newCart.getTotalPrice().subtract(aimedProduct.getTotalPrice()));
+            newCart.setNumberOfProducts(newCart.getNumberOfProducts() - 1);
+            return newCart;
+        }
         return null;
     }
 }

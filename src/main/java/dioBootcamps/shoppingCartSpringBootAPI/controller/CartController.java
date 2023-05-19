@@ -40,4 +40,12 @@ public class CartController {
       Cart cart = cartService.mudarQuantidadeDeUmProduto(cartId, productId, newQuantity);
       return  ResponseEntity.ok(cart);
     };
+
+    @DeleteMapping("/{cartId}/{productId}")
+    public ResponseEntity<Cart> removerProdutos(
+            @PathVariable Integer cartId,
+            @PathVariable Integer productId) {
+        Cart cart = cartService.removerProdutos(cartId, productId);
+        return ResponseEntity.ok(cart);
+    }
 }

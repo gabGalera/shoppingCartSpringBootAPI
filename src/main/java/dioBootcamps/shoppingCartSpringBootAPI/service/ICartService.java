@@ -9,5 +9,5 @@ public interface ICartService {
     Cart criarCarrinho();
     Optional<Cart> adicionarProdutos(Integer cartId, Integer productId);
     Cart mudarQuantidadeDeUmProduto(Integer cartId, Integer productId, Integer newQuantity);
-    String removerProdutos(Integer cartId, Integer productId);
+    Cart removerProdutos(Integer cartId, Integer productId);
 }
